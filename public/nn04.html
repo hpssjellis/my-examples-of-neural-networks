@@ -50,12 +50,14 @@
         let myHiddenToOutputWeights = Array.from({length: 10}, () => Array.from({length: 3}, () => Math.random()));
 
         // Helper to create node divs
-        function createNode(type, index) {
+        function createNode(type, index, clickable = true) {
             const node = document.createElement('div');
             node.className = 'node inactive';
             node.id = `${type}${index}`;
             node.innerHTML = `${type.charAt(0).toUpperCase()}${index}`;
-            node.onclick = () => toggleInput(index);
+            if (clickable) {
+                node.onclick = () => toggleInput(index);
+            }
             return node;
         }
 
@@ -66,16 +68,16 @@
             myInputNodes.push(false);  // Default inactive
         }
 
-        // Create hidden layer (10 nodes)
+        // Create hidden layer (10 nodes, non-clickable)
         for (let i = 0; i < 10; i++) {
-            const node = createNode('hidden', i);
+            const node = createNode('hidden', i, false);
             document.getElementById('hiddenLayer').appendChild(node);
             myHiddenNodes.push(false);  // Default inactive
         }
 
-        // Create output layer (3 nodes)
+        // Create output layer (3 nodes, non-clickable)
         for (let i = 0; i < 3; i++) {
-            const node = createNode('output', i);
+            const node = createNode('output', i, false);
             document.getElementById('outputLayer').appendChild(node);
             myOutputNodes.push(false);  // Default inactive
         }
@@ -88,78 +90,32 @@
             calculateNetwork();
         }
 
-        // Simulate the network by activating hidden and output layers
+        // Simulate the network by activating hidden and output nodes
         function calculateNetwork() {
-            // Hidden layer activation based on inputs and weights
-            for (let h = 0; h < myHiddenNodes.length; h++) {
-                let sum = 0;
-                for (let i = 0; i < myInputNodes.length; i++) {
-                    sum += myInputNodes[i] ? myInputToHiddenWeights[i][h] : 0;
+            // Reset hidden and output nodes
+            myHiddenNodes.fill(false);
+            myOutputNodes.fill(false);
+
+            // Activate hidden nodes based on input nodes and weights
+            for (let i = 0; i < myHiddenNodes.length; i++) {
+                for (let j = 0; j < myInputNodes.length; j++) {
+                    if (myInputNodes[j]) {
+                        myHiddenNodes[i] = myHiddenNodes[i] || (Math.random() < myInputToHiddenWeights[j][i]);
+                    }
                 }
-                myHiddenNodes[h] = sum > 0.5;  // Simple threshold activation
-                const hiddenNode = document.getElementById(`hidden${h}`);
-                hiddenNode.className = myHiddenNodes[h] ? 'node active' : 'node inactive';
+                document.getElementById(`hidden${i}`).className = myHiddenNodes[i] ? 'node active' : 'node inactive';
             }
 
-            // Output layer activation based on hidden nodes and weights
-            for (let o = 0; o < myOutputNodes.length; o++) {
-                let sum = 0;
-                for (let h = 0; h < myHiddenNodes.length; h++) {
-                    sum += myHiddenNodes[h] ? myHiddenToOutputWeights[h][o] : 0;
+            // Activate output nodes based on hidden nodes and weights
+            for (let i = 0; i < myOutputNodes.length; i++) {
+                for (let j = 0; j < myHiddenNodes.length; j++) {
+                    if (myHiddenNodes[j]) {
+                        myOutputNodes[i] = myOutputNodes[i] || (Math.random() < myHiddenToOutputWeights[j][i]);
+                    }
                 }
-                myOutputNodes[o] = sum > 0.5;  // Simple threshold activation
-                const outputNode = document.getElementById(`output${o}`);
-                outputNode.className = myOutputNodes[o] ? 'node active' : 'node inactive';
+                document.getElementById(`output${i}`).className = myOutputNodes[i] ? 'node active' : 'node inactive';
             }
         }
-
-        // Display weight adjustment inputs with labels
-        function createWeightAdjustmentUI() {
-            const inputToHiddenContainer = document.getElementById('inputToHiddenWeights');
-            inputToHiddenContainer.innerHTML = `<h3>Input to Hidden Layer Weights</h3>`;
-
-            myInputToHiddenWeights.forEach((row, i) => {
-                row.forEach((weight, h) => {
-                    const label = document.createElement('label');
-                    label.innerText = `(I${i}-H${h}): `;
-                    const input = document.createElement('input');
-                    input.type = 'number';
-                    input.value = weight.toFixed(2);
-                    input.style = 'width: 50px; height:50px';
-                    input.onchange = () => {
-                        myInputToHiddenWeights[i][h] = parseFloat(input.value);
-                        calculateNetwork();  // Recalculate network on weight change
-                    };
-                    inputToHiddenContainer.appendChild(label);
-                    inputToHiddenContainer.appendChild(input);
-                });
-                inputToHiddenContainer.appendChild(document.createElement('br'));
-            });
-
-            const hiddenToOutputContainer = document.getElementById('hiddenToOutputWeights');
-            hiddenToOutputContainer.innerHTML = `<h3>Hidden to Output Layer Weights</h3>`;
-
-            myHiddenToOutputWeights.forEach((row, h) => {
-                row.forEach((weight, o) => {
-                    const label = document.createElement('label');
-                    label.innerText = `(H${h}-O${o}): `;
-                    const input = document.createElement('input');
-                    input.type = 'number';
-                    input.value = weight.toFixed(2);
-                    input.style = 'width: 50px; height:50px';
-                    input.onchange = () => {
-                        myHiddenToOutputWeights[h][o] = parseFloat(input.value);
-                        calculateNetwork();  // Recalculate network on weight change
-                    };
-                    hiddenToOutputContainer.appendChild(label);
-                    hiddenToOutputContainer.appendChild(input);
-                });
-                hiddenToOutputContainer.appendChild(document.createElement('br'));
-            });
-        }
-
-        createWeightAdjustmentUI();  // Create weight adjustment inputs
     </script>
-
 </body>
 </html>
