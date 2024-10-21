@@ -121,7 +121,7 @@
             myInputToHiddenWeights.forEach((row, i) => {
                 row.forEach((weight, h) => {
                     const label = document.createElement('label');
-                    label.innerText = `W(i${i}-H${h}): `;
+                    label.innerText = `(I${i}-H${h}): `;
                     const input = document.createElement('input');
                     input.type = 'number';
                     input.value = weight.toFixed(2);
@@ -142,7 +142,7 @@
             myHiddenToOutputWeights.forEach((row, h) => {
                 row.forEach((weight, o) => {
                     const label = document.createElement('label');
-                    label.innerText = `W(h${h}-O${o}): `;
+                    label.innerText = `(H${h}-O${o}): `;
                     const input = document.createElement('input');
                     input.type = 'number';
                     input.value = weight.toFixed(2);
