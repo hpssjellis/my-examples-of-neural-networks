@@ -33,7 +33,9 @@
 <body>
 
     <h2>Neural Network Simulation (Click to Activate Nodes)</h2>
-  
+    
+    Input and output Nodes: <input id="myInOutNodes" type=text value=3>, Hidden Nodes: <input id="myHiddenLayer" type=text value=10>
+    
     <button onclick="trainNetwork()">Train Network</button>
   
     <div class="container" id="inputLayer"></div>
@@ -45,6 +47,9 @@
     </div>
 
     <script>
+        //  Globals
+        let model;
+        
         const myInputNodes = [];
         const myHiddenNodes = [];
         const myOutputNodes = [];
@@ -154,7 +159,7 @@
 
         createWeightAdjustmentUI();
 
-        let model;
+       
 
         async function trainNetwork() {
             if (!model) {
