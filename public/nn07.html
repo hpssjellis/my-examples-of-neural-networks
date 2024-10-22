@@ -165,7 +165,7 @@
             const inputs = tf.tensor2d([[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1], [1, 1, 1]]);
             const outputs = tf.tensor2d([[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1], [1, 1, 1]]);
 
-            await model.fit(inputs, outputs, {epochs: 1000});
+            await model.fit(inputs, outputs, {epochs: 100});
 
             const inputToHiddenWeights = model.layers[0].getWeights()[0].arraySync();
             const hiddenToOutputWeights = model.layers[1].getWeights()[0].arraySync();
