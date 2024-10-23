@@ -15,9 +15,9 @@
             line-height: 50px;
             font-size: 12px;
         }
-        .active { background-color: green; color: white; font-size: 10px;}
-        .inactive { background-color: red; color: white; font-size: 10px;}
-        .container { display: flex; justify-content: center; }
+        .active { background-color: green; color: white; }
+        .inactive { background-color: red; color: white;}
+        .container { display: flex; justify-content: center;  }
         .weights-container {
             overflow-x: auto;
             display:flex;
@@ -130,11 +130,11 @@
             myInputToHiddenWeights.forEach((row, i) => {
                 row.forEach((weight, h) => {
                     const label = document.createElement('label');
-                    label.innerText = ` I${i}-H${h}`;
+                    label.innerText = `, I${i}-H${h}`;
                     const input = document.createElement('input');
                     input.type = 'number';
                     input.value = weight.toFixed(2);
-                    input.style = 'width: 50px; height:20px';
+                    input.style = 'width: 40px; height:15px; font-size: 10px;';
                     input.onchange = () => {
                         myInputToHiddenWeights[i][h] = parseFloat(input.value);
                         calculateNetwork();
@@ -151,11 +151,11 @@
             myHiddenToOutputWeights.forEach((row, h) => {
                 row.forEach((weight, o) => {
                     const label = document.createElement('label');
-                    label.innerText = ` H${h}-O${o}`;
+                    label.innerText = `, H${h}-O${o}`;
                     const input = document.createElement('input');
                     input.type = 'number';
                     input.value = weight.toFixed(2);
-                    input.style = 'width: 50px; height:20px';
+                    input.style = 'width: 40px; height:15px; font-size: 10px;';
                     input.onchange = () => {
                         myHiddenToOutputWeights[h][o] = parseFloat(input.value);
                         calculateNetwork();
