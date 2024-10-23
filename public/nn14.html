@@ -45,9 +45,10 @@
 
 
 
-    Input and output Nodes: <input id="myInOutNodes" size=5 type=text value=4>, Hidden Nodes: <input size=7  id="myHiddenLayer" type=text value=10>
+   Hidden Nodes: <input size=7  id="myHiddenLayer" type=text value=10>
     
-    <button id="myTrainButton" style="background-color:lightgray;" onclick="trainNetwork()">Train Network</button>
+    <button id="myTrainButton" style="background-color:lightgray;" onclick="trainNetwork()">Train Network</button>, 
+    Epochs: <input id="myEpochs" size=7 type=number value=3000>,
   
     <div class="container" id="inputLayer"></div>
     <div class="container" id="hiddenLayer"></div>
@@ -60,8 +61,8 @@
     <script>
         //  Globals
         let model;
-        let myInOuts=4;
-        let myHiddens = 10;
+        let myInOuts=3;
+        let myHiddens = 8;
         const myInputNodes = [];
         const myHiddenNodes = [];
         const myOutputNodes = [];
@@ -189,7 +190,7 @@
             const inputs = tf.tensor2d([[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1], [1, 1, 1]]);
             const outputs = tf.tensor2d([[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1], [1, 1, 1]]);
 
-            await model.fit(inputs, outputs, {epochs: 3000});
+            await model.fit(inputs, outputs, {epochs: parseInt(document.getElementById('myEpochs').value)});
 
             const inputToHiddenWeights = model.layers[0].getWeights()[0].arraySync();
             const hiddenToOutputWeights = model.layers[1].getWeights()[0].arraySync();
