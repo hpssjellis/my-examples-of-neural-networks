@@ -48,7 +48,7 @@
    Hidden Nodes: <input size=7  id="myHiddenLayer" type=text value=10>
     
     <button id="myTrainButton" style="background-color:lightgray;" onclick="trainNetwork()">Train Network</button>, 
-    Epochs: <input id="myEpochs" size=7 type=number value=3000>,
+    Epochs: <input id="myEpochs" size=7 type=number value=3000>, <span id="myFast">...</span>
   
     <div class="container" id="inputLayer"></div>
     <div class="container" id="hiddenLayer"></div>
@@ -62,7 +62,7 @@
         //  Globals
         let model;
         let myInOuts=3;
-        let myHiddens = 8;
+        let myHiddens = 12;
         const myInputNodes = [];
         const myHiddenNodes = [];
         const myOutputNodes = [];
@@ -190,7 +190,14 @@
             const inputs = tf.tensor2d([[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1], [1, 1, 1]]);
             const outputs = tf.tensor2d([[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1], [1, 1, 1]]);
 
-            await model.fit(inputs, outputs, {epochs: parseInt(document.getElementById('myEpochs').value)});
+            await model.fit(inputs, outputs, {
+                epochs: parseInt(document.getElementById('myEpochs').value)
+                callbacks:  { 
+                  onEpochEnd: async (epoch, logs) => {                                                                                         
+                 document.getElementById('myFast').innerHTML = 'Epoch # ' + (epoch+1) + '/document.getElementById('myEpochs').value, Loss: ' + logs.loss + '<br><br>'
+            await tf.nextFrame();  // This improves UI responsiveness during training.  
+          }    // end onEpochEnd callback 
+            });
 
             const inputToHiddenWeights = model.layers[0].getWeights()[0].arraySync();
             const hiddenToOutputWeights = model.layers[1].getWeights()[0].arraySync();
