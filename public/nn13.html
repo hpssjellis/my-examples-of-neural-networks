@@ -21,6 +21,7 @@
         .weights-container {
             overflow-x: auto;
             display:flex;
+            flex-wrap: wrap;
             white-space: nowrap;
             width: 90%;
             margin: 20px auto;
@@ -144,7 +145,7 @@
             });
 
             const hiddenToOutputContainer = document.getElementById('hiddenToOutputWeights');
-            hiddenToOutputContainer.innerHTML = `<br>`;
+            hiddenToOutputContainer.innerHTML = `<br><br>`;
 
             myHiddenToOutputWeights.forEach((row, h) => {
                 row.forEach((weight, o) => {
