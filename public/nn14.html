@@ -45,10 +45,10 @@
 
 
 
-   Hidden Nodes: <input size=7  id="myHiddenLayer" type=text value=12>
+ <!--  Hidden Nodes: <input size=7  id="myHiddenLayer" type=text value=12>   -->
     
     <button id="myTrainButton" style="background-color:lightgray;" onclick="trainNetwork()">Train Network</button>, 
-    Epochs: <input id="myEpochs" size=7 type=number value=3000> <span id="myFast">...</span>
+    Epochs: <input id="myEpochs" size=5 type=number value=1000> <span id="myFast">...</span>
   
     <div class="container" id="inputLayer"></div>
     <div class="container" id="hiddenLayer"></div>
@@ -62,7 +62,7 @@
         //  Globals
         let model;
         let myInOuts=3;
-        let myHiddens = 12;
+        let myHiddens = 20;
         const myInputNodes = [];
         const myHiddenNodes = [];
         const myOutputNodes = [];
