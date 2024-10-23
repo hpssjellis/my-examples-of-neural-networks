@@ -177,12 +177,23 @@ On a node constrained device what do you think is better?
 
         async function trainNetwork() {
           document.getElementById('myTrainButton').style.backgroundColor = 'red'
+
+            /*
             if (!model) {
                 model = tf.sequential();
                 model.add(tf.layers.dense({units: myHiddens, inputShape: [myInOuts], activation: 'relu'}));
                 model.add(tf.layers.dense({units: myInOuts, activation: 'sigmoid'}));
                 const myOptimizer = tf.train.adam(0.1); 
                 model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
+            }
+
+            */
+
+            if (!model) {
+                model = tf.sequential();
+                model.add(tf.layers.dense({units: 10, inputShape: [3], activation: 'sigmoid'}));
+                model.add(tf.layers.dense({units: 3, activation: 'sigmoid'}));
+                model.compile({optimizer: 'adam', loss: 'meanSquaredError'});
             }
 
             // Update model weights with manually edited weights
