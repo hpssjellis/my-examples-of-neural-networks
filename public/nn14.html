@@ -60,12 +60,14 @@
     <script>
         //  Globals
         let model;
+        let myInOuts=3;
+        let myHiddens = 10;
         const myInputNodes = [];
         const myHiddenNodes = [];
         const myOutputNodes = [];
 
-        let myInputToHiddenWeights = Array.from({length: 3}, () => Array.from({length: 10}, () => Math.random()));
-        let myHiddenToOutputWeights = Array.from({length: 10}, () => Array.from({length: 3}, () => Math.random()));
+        let myInputToHiddenWeights = Array.from({length: myInOuts}, () => Array.from({length: myHiddens}, () => Math.random()));
+        let myHiddenToOutputWeights = Array.from({length: myHiddens}, () => Array.from({length: myInOuts}, () => Math.random()));
 
         function createNode(type, index) {
             const node = document.createElement('div');
@@ -76,19 +78,19 @@
             return node;
         }
 
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < myInOuts; i++) {
             const node = createNode('input', i);
             document.getElementById('inputLayer').appendChild(node);
             myInputNodes.push(false);
         }
 
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < myHiddens; i++) {
             const node = createNode('hidden', i);
             document.getElementById('hiddenLayer').appendChild(node);
             myHiddenNodes.push(false);
         }
 
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < myInOuts; i++) {
             const node = createNode('output', i);
             document.getElementById('outputLayer').appendChild(node);
             myOutputNodes.push(false);
@@ -175,8 +177,8 @@
           document.getElementById('myTrainButton').style.backgroundColor = 'red'
             if (!model) {
                 model = tf.sequential();
-                model.add(tf.layers.dense({units: 10, inputShape: [3], activation: 'relu'}));
-                model.add(tf.layers.dense({units: 3, activation: 'sigmoid'}));
+                model.add(tf.layers.dense({units: myHiddens, inputShape: [myInOuts], activation: 'relu'}));
+                model.add(tf.layers.dense({units: myInOuts, activation: 'sigmoid'}));
                 model.compile({optimizer: 'adam', loss: 'meanSquaredError'});
             }
 
