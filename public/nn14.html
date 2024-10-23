@@ -191,7 +191,7 @@
             const outputs = tf.tensor2d([[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1], [1, 1, 1]]);
 
             await model.fit(inputs, outputs, {
-                epochs: parseInt(document.getElementById('myEpochs').value)
+                epochs: parseInt(document.getElementById('myEpochs').value),
                 callbacks:  { 
                   onEpochEnd: async (epoch, logs) => {                                                                                         
                  document.getElementById('myFast').innerHTML = 'Epoch # ' + (epoch+1) + '/document.getElementById('myEpochs').value, Loss: ' + logs.loss + '<br><br>'
