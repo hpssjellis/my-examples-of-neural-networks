@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neural Network Demo</title>
+
+<!--
+    
     <style>
+        
         .node {
             width: 50px;
             height: 50px;
@@ -27,6 +31,9 @@
         }
         .weights label { margin: 0 10px; }
     </style>
+-->
+
+    
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
 </head>
 <body>
@@ -165,9 +172,10 @@
           document.getElementById('myTrainButton').style.backgroundColor = 'red'
             if (!model) {
                 model = tf.sequential();
-                model.add(tf.layers.dense({units: 10, inputShape: [3], activation: 'sigmoid'}));
+                model.add(tf.layers.dense({units: 10, inputShape: [3], activation: 'relu'}));
                 model.add(tf.layers.dense({units: 3, activation: 'sigmoid'}));
                 model.compile({optimizer: 'adam', loss: 'meanSquaredError'});
+                //model.compile({optimizer: 'adam', loss: 'binaryCrossentropy'});
             }
 
             // Update model weights with manually edited weights
