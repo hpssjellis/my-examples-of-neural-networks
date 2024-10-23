@@ -49,7 +49,7 @@ On a node constrained device what do you think is better?
  <!--  Hidden Nodes: <input size=7  id="myHiddenLayer" type=text value=12>   -->
     
     <button id="myTrainButton" style="background-color:lightgray;" onclick="trainNetwork()">Train Network</button>, 
-    Epochs: <input id="myEpochs"  type=number value=1000> <span id="myFast">...</span>
+    Epochs: <input id="myEpochs" size=7  type=number value=1000> <span id="myFast">...</span>
   
     <div class="container" id="inputLayer"></div>
     <div class="container" id="hiddenLayer"></div>
@@ -63,7 +63,7 @@ On a node constrained device what do you think is better?
         //  Globals
         let model;
         let myInOuts=3;
-        let myHiddens = 20;
+        let myHiddens = 3;
         const myInputNodes = [];
         const myHiddenNodes = [];
         const myOutputNodes = [];
