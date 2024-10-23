@@ -193,9 +193,11 @@
             await model.fit(inputs, outputs, {
                 epochs: parseInt(document.getElementById('myEpochs').value),
                 callbacks:  { 
-                  onEpochEnd: async (epoch, logs) => {                                                                                         
-                    document.getElementById('myFast').innerHTML = `Epoch # ${epoch} / ${document.getElementById('myEpochs').value}, Loss: ${logs.loss.toFixed(5)} <br><br>`
-                    await tf.nextFrame();  // This improves UI responsiveness during training.  
+                  onEpochEnd: async (epoch, logs) => { 
+                      if ((epoch +1 ) % 100 === 0) {
+                         document.getElementById('myFast').innerHTML = `Epoch # ${epoch+1} / ${document.getElementById('myEpochs').value}, Loss: ${logs.loss.toFixed(5)} <br><br>`
+                         await tf.nextFrame();  // This improves UI responsiveness during training.  
+                      }
                   }    // end onEpochEnd callback 
                }
             });
