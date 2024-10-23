@@ -194,7 +194,7 @@
                 epochs: parseInt(document.getElementById('myEpochs').value),
                 callbacks:  { 
                   onEpochEnd: async (epoch, logs) => {                                                                                         
-                 document.getElementById('myFast').innerHTML = 'Epoch # ' + (epoch+1) + '/'+document.getElementById('myEpochs').value+', Loss: ' + logs.loss + '<br><br>'
+                 document.getElementById('myFast').innerHTML = `Epoch # ${epoch} / ${document.getElementById('myEpochs').value}, Loss: ${logs.loss} <br><br>`
             await tf.nextFrame();  // This improves UI responsiveness during training.  
           }    // end onEpochEnd callback 
             });
