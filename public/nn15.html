@@ -202,6 +202,7 @@ On a node constrained device what do you think is better?
 
             const inputs = tf.tensor2d([[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1], [1, 1, 1]]);
             const outputs = tf.tensor2d([[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1], [1, 1, 1]]);
+            document.getElementById('myFast').innerHTML = `Epoch # 0 / ${document.getElementById('myEpochs').value}, Loss: <br><br>`
 
             await model.fit(inputs, outputs, {
                 epochs: parseInt(document.getElementById('myEpochs').value),
