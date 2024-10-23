@@ -194,9 +194,10 @@
                 epochs: parseInt(document.getElementById('myEpochs').value),
                 callbacks:  { 
                   onEpochEnd: async (epoch, logs) => {                                                                                         
-                 document.getElementById('myFast').innerHTML = `Epoch # ${epoch} / ${document.getElementById('myEpochs').value}, Loss: ${logs.loss} <br><br>`
-            await tf.nextFrame();  // This improves UI responsiveness during training.  
-          }    // end onEpochEnd callback 
+                    document.getElementById('myFast').innerHTML = `Epoch # ${epoch} / ${document.getElementById('myEpochs').value}, Loss: ${logs.loss} <br><br>`
+                    await tf.nextFrame();  // This improves UI responsiveness during training.  
+                  }    // end onEpochEnd callback 
+               }
             });
 
             const inputToHiddenWeights = model.layers[0].getWeights()[0].arraySync();
