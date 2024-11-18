@@ -49,7 +49,7 @@ On a node constrained device what do you think is better?
  <!--  Hidden Nodes: <input size=7  id="myHiddenLayer" type=text value=12>   -->
 
     <button id="myTrainButton" style="background-color:lightgray;" onclick="{
-     let myNew = document.getElementById('myReset').value
+     let myNew = parseInt(document.getElementById('myReset').value)
 
 
         let myInputToHiddenWeights = Array.from({length: myInOuts}, () => Array.from({length: myHiddens}, () => myNew   ));
