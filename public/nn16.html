@@ -49,7 +49,7 @@ On a node constrained device what do you think is better?
  <!--  Hidden Nodes: <input size=7  id="myHiddenLayer" type=text value=12>   -->
     
     <button id="myTrainButton" style="background-color:lightgray;" onclick="trainNetwork()">Train Network</button>, 
-    Epochs: <input id="myEpochs" size=7  type=number value=1000> <span id="myFast">...</span>
+    Epochs: <input id="myEpochs" size=7  type=number value=300> <span id="myFast">...</span>
   
     <div class="container" id="inputLayer"></div>
     <div class="container" id="hiddenLayer"></div>
@@ -178,22 +178,12 @@ On a node constrained device what do you think is better?
         async function trainNetwork() {
           document.getElementById('myTrainButton').style.backgroundColor = 'red'
 
-            /*
-            if (!model) {
-                model = tf.sequential();
-                model.add(tf.layers.dense({units: myHiddens, inputShape: [myInOuts], activation: 'relu'}));
-                model.add(tf.layers.dense({units: myInOuts, activation: 'sigmoid'}));
-                const myOptimizer = tf.train.adam(0.1); 
-                model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
-            }
-
-            */
 
             if (!model) {
                 model = tf.sequential();
                 model.add(tf.layers.dense({units: myHiddens, inputShape: [myInOuts], activation: 'relu'}));
                 model.add(tf.layers.dense({units: myInOuts, activation: 'sigmoid'}));
-                const myOptimizer = tf.train.adam(0.05); //   const myOptimizer = tf.train.sgd(0.5);  // try other values.
+                const myOptimizer = tf.train.adam(0.1); //   const myOptimizer = tf.train.sgd(0.5);  // try other values.
                // model.compile({optimizer: 'adam', loss: 'meanSquaredError'});
                 model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'}); 
             }
