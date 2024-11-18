@@ -48,8 +48,19 @@ On a node constrained device what do you think is better?
 
  <!--  Hidden Nodes: <input size=7  id="myHiddenLayer" type=text value=12>   -->
 
-    <button id="myTrainButton" style="background-color:lightgray;" onclick="resetNetwork()">Reset Network </button>, 
-    Reset to: <input id="myEpochs" size=7  type=number value=0><br>
+    <button id="myTrainButton" style="background-color:lightgray;" onclick="{
+     let myNew = document.getElementById('myReset').value
+     for (let x=0;  x < myInOuts ;  x++){
+        myInputNodes[x] = myNew
+        myOutputNodes[x] = myNew
+     }
+    for (let y=0;  y < myHiddens ;  y++){
+        myHiddenNodes[y] = myNew
+     }
+
+     calculateNetwork()   
+    }">Reset Network </button>, 
+    Reset to: <input id="myReset" size=7  type=number value=0><br>
     
     <button id="myTrainButton" style="background-color:lightgray;" onclick="trainNetwork()">Train Network</button>, 
     Epochs: <input id="myEpochs" size=7  type=number value=300> <span id="myFast">...</span>
