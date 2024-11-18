@@ -50,6 +50,12 @@ On a node constrained device what do you think is better?
 
     <button id="myTrainButton" style="background-color:lightgray;" onclick="{
      let myNew = document.getElementById('myReset').value
+
+
+        let myInputToHiddenWeights = Array.from({length: myInOuts}, () => Array.from({length: myHiddens}, () => myNew   ));
+        let myHiddenToOutputWeights = Array.from({length: myHiddens}, () => Array.from({length: myInOuts}, () => myNew  ));
+
+        /*
      for (let x=0;  x < myInOuts ;  x++){
         myInputNodes[x] = myNew
         myOutputNodes[x] = myNew
@@ -57,6 +63,8 @@ On a node constrained device what do you think is better?
     for (let y=0;  y < myHiddens ;  y++){
         myHiddenNodes[y] = myNew
      }
+
+        */
 
      calculateNetwork()   
     }">Reset Network </button>, 
