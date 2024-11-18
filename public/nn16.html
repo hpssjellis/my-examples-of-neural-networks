@@ -211,7 +211,7 @@ On a node constrained device what do you think is better?
                 callbacks:  { 
                   onEpochEnd: async (epoch, logs) => { 
                       if ((epoch +1 ) % 100 === 0) {
-                         document.getElementById('myFast').innerHTML = `Epoch # ${epoch+1} / ${document.getElementById('myEpochs').value}, Loss: ${logs.loss.toFixed(7)} <br><br>`
+                         document.getElementById('myFast').innerHTML = `Epoch # ${epoch+1} / ${document.getElementById('myEpochs').value}, Loss: ${logs.loss.toFixed(9)} <br><br>`
                          await tf.nextFrame();  // This improves UI responsiveness during training.  
                       }
                   }    // end onEpochEnd callback 
