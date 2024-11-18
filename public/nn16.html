@@ -191,9 +191,11 @@ On a node constrained device what do you think is better?
 
             if (!model) {
                 model = tf.sequential();
-                model.add(tf.layers.dense({units: myHiddens, inputShape: [myInOuts], activation: 'sigmoid'}));
+                model.add(tf.layers.dense({units: myHiddens, inputShape: [myInOuts], activation: 'relu'}));
                 model.add(tf.layers.dense({units: myInOuts, activation: 'sigmoid'}));
-                model.compile({optimizer: 'adam', loss: 'meanSquaredError'});
+                const myOptimizer = tf.train.adam(0.01); //   const myOptimizer = tf.train.sgd(0.5);  // try other values.
+               // model.compile({optimizer: 'adam', loss: 'meanSquaredError'});
+                model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'}); 
             }
 
             // Update model weights with manually edited weights
