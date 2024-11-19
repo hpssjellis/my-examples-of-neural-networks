@@ -49,7 +49,7 @@ On a node constrained device what do you think is better?  <br>
  <!--  Hidden Nodes: <input size=7  id="myHiddenLayer" type=text value=12>   -->
 
     <button  style="background-color:lightgray;" onclick="{
-     let myNew = parseInt(document.getElementById('myReset').value)
+     let myNew = parseFloat(document.getElementById('myReset').value)
 
 
 
@@ -90,7 +90,7 @@ for (const attr of inputLayer.attributes) {
 
      calculateNetwork()   
     }">Reset Network </button>, 
-    Reset to: <input id="myReset" size=7  type=number value=0><br>
+    Reset to: <input id="myReset" size=7  type=number value=0.23><br>
     
     <button id="myTrainButton" style="background-color:lightgray;" onclick="trainNetwork()">Train Network</button>, 
     Epochs: <input id="myEpochs" size=7  type=number value=300>,  adam: <input id="myAdam" size=7  type=text value=0.15>  <span id="myFast">...</span>
