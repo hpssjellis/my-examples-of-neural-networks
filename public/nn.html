@@ -43,13 +43,12 @@
 
     <h2>Neural Network Simulation (Click to Activate Nodes)</h2>
 The point is to try to make the inputs match the outputs. You can train multiple times and/or manaully adjusts the weights.<br>
-On a node constrained device what do you think is better?    
+On a node constrained device what do you think is better?  <br>  
 
 
- <!--  Hidden Nodes: <input size=7  id="myHiddenLayer" type=text value=12>   -->
     
     <button id="myTrainButton" style="background-color:lightgray;" onclick="trainNetwork()">Train Network</button>, 
-    Epochs: <input id="myEpochs" size=7  type=number value=1000> <span id="myFast">...</span>
+    Epochs: <input id="myEpochs" size=7  type=number value=300>,  adam: <input id="myAdam" size=7  type=text value=0.15>  <span id="myFast">...</span>
   
     <div class="container" id="inputLayer"></div>
     <div class="container" id="hiddenLayer"></div>
@@ -68,9 +67,31 @@ On a node constrained device what do you think is better?
         const myHiddenNodes = [];
         const myOutputNodes = [];
 
-        let myInputToHiddenWeights = Array.from({length: myInOuts}, () => Array.from({length: myHiddens}, () => Math.random()));
-        let myHiddenToOutputWeights = Array.from({length: myHiddens}, () => Array.from({length: myInOuts}, () => Math.random()));
+        let myInputToHiddenWeights = Array.from({length: myInOuts}, () => Array.from({length: myHiddens}, () => 5-Math.random()*10));
+        let myHiddenToOutputWeights = Array.from({length: myHiddens}, () => Array.from({length: myInOuts}, () => 5-Math.random()*10));
 
+
+
+
+        function setAllWeights(fixedValue) {
+    myInputToHiddenWeights.forEach((row, i) => {
+        row.forEach((_, h) => {
+            myInputToHiddenWeights[i][h] = fixedValue;
+        });
+    });
+
+    myHiddenToOutputWeights.forEach((row, h) => {
+        row.forEach((_, o) => {
+            myHiddenToOutputWeights[h][o] = fixedValue;
+        });
+    });
+
+    createWeightAdjustmentUI(); // Update the UI to reflect the new weights
+    console.log(`All weights set to ${fixedValue}`);
+}
+
+
+        
         function createNode(type, index) {
             const node = document.createElement('div');
             node.className = 'node inactive';
@@ -178,22 +199,15 @@ On a node constrained device what do you think is better?
         async function trainNetwork() {
           document.getElementById('myTrainButton').style.backgroundColor = 'red'
 
-            /*
+
             if (!model) {
                 model = tf.sequential();
                 model.add(tf.layers.dense({units: myHiddens, inputShape: [myInOuts], activation: 'relu'}));
                 model.add(tf.layers.dense({units: myInOuts, activation: 'sigmoid'}));
-                const myOptimizer = tf.train.adam(0.1); 
-                model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
-            }
-
-            */
-
-            if (!model) {
-                model = tf.sequential();
-                model.add(tf.layers.dense({units: myHiddens, inputShape: [myInOuts], activation: 'sigmoid'}));
-                model.add(tf.layers.dense({units: myInOuts, activation: 'sigmoid'}));
-                model.compile({optimizer: 'adam', loss: 'meanSquaredError'});
+                const myOptimizer = tf.train.adam(parseFloat(document.getElementById('myAdam').value)); // 
+               // const myOptimizer = tf.train.adam(0.15); //   const myOptimizer = tf.train.sgd(0.5);  // try other values.
+               // model.compile({optimizer: 'adam', loss: 'meanSquaredError'});
+                model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'}); 
             }
 
             // Update model weights with manually edited weights
@@ -209,7 +223,7 @@ On a node constrained device what do you think is better?
                 callbacks:  { 
                   onEpochEnd: async (epoch, logs) => { 
                       if ((epoch +1 ) % 100 === 0) {
-                         document.getElementById('myFast').innerHTML = `Epoch # ${epoch+1} / ${document.getElementById('myEpochs').value}, Loss: ${logs.loss.toFixed(7)} <br><br>`
+                         document.getElementById('myFast').innerHTML = `Epoch # ${epoch+1} / ${document.getElementById('myEpochs').value}, Loss: ${logs.loss.toFixed(9)} <br><br>`
                          await tf.nextFrame();  // This improves UI responsiveness during training.  
                       }
                   }    // end onEpochEnd callback 
