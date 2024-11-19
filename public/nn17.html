@@ -50,12 +50,13 @@ On a node constrained device what do you think is better?  <br>
 
     <button  style="background-color:lightgray;" onclick="{
      let myNew = parseInt(document.getElementById('myReset').value)
+     console.log(inputToHiddenContainer)
 
-
+/*
         let myInputToHiddenWeights = Array.from({length: myInOuts}, () => Array.from({length: myHiddens}, () => myNew   ));
         let myHiddenToOutputWeights = Array.from({length: myHiddens}, () => Array.from({length: myInOuts}, () => myNew  ));
 
-        /*
+
      for (let x=0;  x < myInOuts ;  x++){
         myInputNodes[x] = myNew
         myOutputNodes[x] = myNew
