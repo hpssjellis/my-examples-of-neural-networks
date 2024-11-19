@@ -50,6 +50,10 @@ On a node constrained device what do you think is better?  <br>
 
     <button  style="background-color:lightgray;" onclick="{
      let myNew = parseInt(document.getElementById('myReset').value)
+
+
+
+        setAllWeights(myNew)
     // console.log(inputToHiddenContainer)
 
 
@@ -111,6 +115,28 @@ for (const attr of inputLayer.attributes) {
         let myInputToHiddenWeights = Array.from({length: myInOuts}, () => Array.from({length: myHiddens}, () => Math.random()));
         let myHiddenToOutputWeights = Array.from({length: myHiddens}, () => Array.from({length: myInOuts}, () => Math.random()));
 
+
+
+
+        function setAllWeights(fixedValue) {
+    myInputToHiddenWeights.forEach((row, i) => {
+        row.forEach((_, h) => {
+            myInputToHiddenWeights[i][h] = fixedValue;
+        });
+    });
+
+    myHiddenToOutputWeights.forEach((row, h) => {
+        row.forEach((_, o) => {
+            myHiddenToOutputWeights[h][o] = fixedValue;
+        });
+    });
+
+    createWeightAdjustmentUI(); // Update the UI to reflect the new weights
+    console.log(`All weights set to ${fixedValue}`);
+}
+
+
+        
         function createNode(type, index) {
             const node = document.createElement('div');
             node.className = 'node inactive';
