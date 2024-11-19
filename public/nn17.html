@@ -112,8 +112,8 @@ for (const attr of inputLayer.attributes) {
         const myHiddenNodes = [];
         const myOutputNodes = [];
 
-        let myInputToHiddenWeights = Array.from({length: myInOuts}, () => Array.from({length: myHiddens}, () => Math.random()));
-        let myHiddenToOutputWeights = Array.from({length: myHiddens}, () => Array.from({length: myInOuts}, () => Math.random()));
+        let myInputToHiddenWeights = Array.from({length: myInOuts}, () => Array.from({length: myHiddens}, () => 5-Math.random()*10));
+        let myHiddenToOutputWeights = Array.from({length: myHiddens}, () => Array.from({length: myInOuts}, () => 5-Math.random()*10));
 
 
 
