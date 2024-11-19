@@ -52,11 +52,24 @@ On a node constrained device what do you think is better?  <br>
      let myNew = parseInt(document.getElementById('myReset').value)
     // console.log(inputToHiddenContainer)
 
+
+        const inputLayer = document.getElementById('inputLayer');
+for (const child of inputLayer.children) {
+    console.log(`Tag: ${child.tagName}, ID: ${child.id}`);
+}
+
+const inputLayer = document.getElementById('inputLayer');
+for (const attr of inputLayer.attributes) {
+    console.log(`Attribute: ${attr.name}, Value: ${attr.value}`);
+}
+
+
+        /*
         for (const [key, value] of Object.entries(document.getElementById('inputLayer'))) {
            console.log(`Key: ${key}, Value: ${value}`);
         }
 
-/*
+
         let myInputToHiddenWeights = Array.from({length: myInOuts}, () => Array.from({length: myHiddens}, () => myNew   ));
         let myHiddenToOutputWeights = Array.from({length: myHiddens}, () => Array.from({length: myInOuts}, () => myNew  ));
 
