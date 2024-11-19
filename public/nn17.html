@@ -71,7 +71,7 @@ On a node constrained device what do you think is better?  <br>
     Reset to: <input id="myReset" size=7  type=number value=0><br>
     
     <button id="myTrainButton" style="background-color:lightgray;" onclick="trainNetwork()">Train Network</button>, 
-    Epochs: <input id="myEpochs" size=7  type=number value=300> <span id="myFast">...</span>
+    Epochs: <input id="myEpochs" size=7  type=number value=300>,  adam: <input id="myAdam" size=7  type=text value=0.15>  <span id="myFast">...</span>
   
     <div class="container" id="inputLayer"></div>
     <div class="container" id="hiddenLayer"></div>
@@ -205,7 +205,7 @@ On a node constrained device what do you think is better?  <br>
                 model = tf.sequential();
                 model.add(tf.layers.dense({units: myHiddens, inputShape: [myInOuts], activation: 'relu'}));
                 model.add(tf.layers.dense({units: myInOuts, activation: 'sigmoid'}));
-                const myOptimizer = tf.train.adam(0.15); // 
+                const myOptimizer = tf.train.adam(parseFloat(document.getElementById('myAdam').value)); // 
                // const myOptimizer = tf.train.adam(0.15); //   const myOptimizer = tf.train.sgd(0.5);  // try other values.
                // model.compile({optimizer: 'adam', loss: 'meanSquaredError'});
                 model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'}); 
